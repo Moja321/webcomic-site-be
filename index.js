@@ -1,7 +1,30 @@
 const express = require("express");
 const app = express();
 
+//need below to use .env
+require("dotenv").config();
+
+const mongoose = require("mongoose");
+
+//middleware
+//need urlencoded to read encoded data from urls and add them to req.body
+app.use(express.urlencoded({ extended: true }));
+
 const PORT = process.env.PORT || 3000;
+
+//connect to database (mongoDB)
+mongoURI = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_HOST}/${process.env.MONGO_DBNAME}`;
+mongoose.connect(mongoURI, { useUnifiedTopology: true, useNewUrlParser: true });
+mongoose.connection.on(
+  "error",
+  console.error.bind(console, "connection error: ")
+);
+mongoose.connection.on("connected", () => {
+  console.log("successfully connected to MongoDB " + process.env.MONGO_DBNAME);
+});
+mongoose.connection.on("disconnected", () => {
+  console.log("Successfully disconnected");
+});
 
 //set view engine/ejs
 app.set("view engine", "ejs");
