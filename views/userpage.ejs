@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>User page of: <%= locals.loggedInUser || "none"  %></p> 
+    <p>This is where we can create or update comics/series</p>
+    <p>We should add a form here for that</p>
+    <br/>
+    <h2>Create comic</h2>
+    <form action="/comics" method="POST">
+    <label for="title">Title:</label><br>
+    <input type="text" id="title" name="title" value="One Piece"><br>
+    <label for="synopsis">Synopsis:</label><br>
+    <textarea id="synopsis" name="synopsis" rows="4" cols="50" >blablabla</textarea><br>
+    <br>
+    <input type="submit" value="Submit">
+    </form>
+    <br/>
+    <p>A list of created comics will be rendered here, click them to update</p>
+    <h1>Comics List</h1>
+    <ul>
+        <% if (locals.userComics) for(let i=0; i< locals.userComics.length; i++){ %>
+        <li>
+          <a href="/"><%= locals.userComics[i]["title"] %></a>
+          <a href="/"><button>EDIT</button></a>
+          <form
+            style="display: inline"
+            action="/"
+            method="GET"
+          >
+            <input type="submit" value="DELETE" />
+          </form>
+        </li>
+        <br />
+        <%}%>
+    </ul>
+</body>
+</html>
