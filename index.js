@@ -1,6 +1,9 @@
 const express = require("express");
 const app = express();
 
+//for using put and delete http request (without this you can only use get and post)
+const methodOverride = require("method-override");
+
 //need below to use .env
 require("dotenv").config();
 
@@ -21,6 +24,12 @@ app.use(
       saveUninitialized: false,
     })
 );
+
+//To overwrite http methods
+app.use(methodOverride("_method"));
+
+//To allow the serving of static files (like images)
+app.use(express.static('public'));
 
 //custom middleware:
 

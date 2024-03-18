@@ -8,6 +8,19 @@
     <title>Document</title>
 </head>
 <body>
+    <h2>Edit comic</h2>
+    <form action="/comics" method="POST" enctype="multipart/form-data">
+      <label for="title">Title:</label><br>
+      <input type="text" id="title" name="title" value="One Piece" required><br>
+
+      <p>Upload image for comic here</p>
+      <input type="file" accept="image/*" id="comicImg" name="comicImg" required><br>
+
+      <label for="synopsis">Synopsis:</label><br>
+      <textarea id="synopsis" name="synopsis" rows="4" cols="50" required>blablabla</textarea><br>
+      
+      <input type="submit" value="Submit">
+    </form>
     <p>This is the page for individual comics</p>
     <p>There should be a drop down list of comic chapters here</p>
 </body>

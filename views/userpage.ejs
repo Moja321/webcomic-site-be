@@ -11,13 +11,17 @@
     <p>We should add a form here for that</p>
     <br/>
     <h2>Create comic</h2>
-    <form action="/comics" method="POST">
-    <label for="title">Title:</label><br>
-    <input type="text" id="title" name="title" value="One Piece"><br>
-    <label for="synopsis">Synopsis:</label><br>
-    <textarea id="synopsis" name="synopsis" rows="4" cols="50" >blablabla</textarea><br>
-    <br>
-    <input type="submit" value="Submit">
+    <form action="/comics" method="POST" enctype="multipart/form-data">
+      <label for="title">Title:</label><br>
+      <input type="text" id="title" name="title" value="One Piece" required><br>
+
+      <p>Upload image for comic here</p>
+      <input type="file" accept="image/*" id="comicImg" name="comicImg" required><br>
+
+      <label for="synopsis">Synopsis:</label><br>
+      <textarea id="synopsis" name="synopsis" rows="4" cols="50" required>blablabla</textarea><br>
+      
+      <input type="submit" value="Submit">
     </form>
     <br/>
     <p>A list of created comics will be rendered here, click them to update</p>
@@ -26,11 +30,12 @@
         <% if (locals.userComics) for(let i=0; i< locals.userComics.length; i++){ %>
         <li>
           <a href="/"><%= locals.userComics[i]["title"] %></a>
-          <a href="/"><button>EDIT</button></a>
+          <img src="<%=locals.userComics[i]["mainImg"]%>" width="200px" height="120px" alt="comic main image">
+          <a href="/comics/<%=locals.userComics[i].id %>/edit"><button>EDIT</button></a>
           <form
             style="display: inline"
-            action="/"
-            method="GET"
+            action="/comics/<%=locals.userComics[i].id %>?_method=DELETE"
+            method="POST"
           >
             <input type="submit" value="DELETE" />
           </form>
