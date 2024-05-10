@@ -28,7 +28,7 @@ app.use(
 //To overwrite http methods
 app.use(methodOverride("_method"));
 
-//To allow the serving of static files (like images)
+//To allow the serving of static files on the front end (like images)
 app.use(express.static('public'));
 
 //custom middleware:
@@ -66,6 +66,7 @@ app.set("view engine", "ejs");
 const signupController = require("./controllers/signup");
 const loginController = require("./controllers/login");
 const comicsController = require("./controllers/comics");
+//const chaptersController = require("./controllers/chapters");
 
 //use controllers/routers
 app.use("/signup", signupController);
@@ -94,7 +95,7 @@ app.get("/", isAuthenticated, (req,res) => {
 app.get("/userpage" , (req,res) => {
     console.log(req.session);
     if (req.session.user){ //check if req.session.user is not empty
-        res.render("userpage", {loggedInUser: req.session.user["username"]}); 
+        res.render("userpage", {loggedInUser: req.session.user["username"], userComics: req.session.user["comics"]}); 
     } else {
         res.render("userpage"); 
     }

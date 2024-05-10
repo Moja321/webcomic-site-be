@@ -30,6 +30,8 @@ router.get("/",(req,res)=>{
 //   });
 // });
 
+//TODO : redirect/refresh page and show "can not login" message in case of failure
+
 //login.findOne implementation using promises (Model.findOne doesnt accept callbacks anymore)
 router.post("/",(req,res)=>{
 

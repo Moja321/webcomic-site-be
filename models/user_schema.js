@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const chapterSchema = new mongoose.Schema({
-  title: {type: String},
+  chapterTitle: {type: String , required:true},
   pageImg: [{ type: String }] , //validate: [arrayLimit, '{PATH} exceeds the limit of 10'], //keeps address to img stored in server, notice it is an array so you can store multiple addresses
 });
 
@@ -11,7 +11,7 @@ const comicSchema = new mongoose.Schema({
   synopsis: { type: String , required: true },
   likes: { type: Number },
   mainImg: {type:String},
-  // chapter: [ chapterSchema ],
+  chapters: [ chapterSchema ],
 });
 
 const userSchema = new mongoose.Schema({
