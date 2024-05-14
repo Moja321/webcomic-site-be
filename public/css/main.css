@@ -1,0 +1,27 @@
+.navcontainer{
+    display:flex;
+    flex-direction: column;
+}
+
+.navtitle {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* position: fixed; */
+    /* bottom: 0;
+    width: 100vw;
+    min-height: 3vh; */
+}
+
+.navlinks {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.navlinks div {
+    padding-left: 10px;
+    padding-right: 10px;
+}

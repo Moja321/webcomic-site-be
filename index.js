@@ -67,11 +67,13 @@ const signupController = require("./controllers/signup");
 const loginController = require("./controllers/login");
 const comicsController = require("./controllers/comics");
 //const chaptersController = require("./controllers/chapters");
+const usersController = require("./controllers/users");
 
 //use controllers/routers
 app.use("/signup", signupController);
 app.use("/login", loginController);
 app.use("/comics", comicsController);
+app.use("/users", usersController);
 
 
 app.get("/", isAuthenticated, (req,res) => {

@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <%-include("./partials/header.ejs")%>  
 </head>
 <body>
 
@@ -54,7 +54,7 @@
       <br>
       <br>
       <input type="submit" value="Upload chapter pages">
-      <p><%=locals.errorMsg%></p>
+      <p><%=locals.errorMsg% || "Please upload images for the comic chapter selected"></p>
     </form>
     <br>
     <br>

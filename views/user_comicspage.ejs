@@ -1,0 +1,22 @@
+<!-- this page will list all the comics available -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%-include("./partials/header.ejs")%>  
+</head>
+<body>
+    <p>This page is for : <%= locals.text || "none"  %></p> 
+    <p>List of all comics of user should be displayed here</p>
+    <h3>Comics by : <%= locals.username || "none" %></h3>
+    <ul>
+        <% if (locals.comics) for(let i=0; i< locals.comics.length; i++){ %>
+        <li>
+          <p><%= locals.comics[i].title %></p>
+          <a href="/"><button>Go to comic</button></a>
+        </li>
+        <%}%>
+    </ul>
+</body>
+</html>
