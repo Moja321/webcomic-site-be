@@ -65,22 +65,4 @@ router.get("/:id/usercomics",(req,res)=>{
 })
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 module.exports = router;

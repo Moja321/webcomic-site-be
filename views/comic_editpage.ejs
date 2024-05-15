@@ -14,7 +14,7 @@
     <p>This is the page for individual comics</p>
     <p>There should be a drop down list of comic chapters here</p>
 
-    <form action="/comics/<%=editComic["_id"]%>" method="POST" enctype="multipart/form-data">
+    <form action="/editcomics/<%=editComic["_id"]%>" method="POST" enctype="multipart/form-data">
       <label for="title">Title:</label><br>
       <input type="text" id="title" name="title" value="<%=editComic["title"]%>" required><br>
 
@@ -30,7 +30,7 @@
     <br>
 
     <h2>Add new chapter</h2>
-    <form action="/comics/chapters/<%=editComic["_id"]%>" method="POST">
+    <form action="/editcomics/chapters/<%=editComic["_id"]%>" method="POST">
       <label for="title">Chapter Title:</label><br>
       <input type="text" id="chapterTitle" name="chapterTitle" value="Chapter 1" required><br>
       
@@ -38,7 +38,7 @@
     </form>
     <br>
     <p>Chapters list:</p>
-    <form action="/comics/edit-chapters/<%=editComic["_id"]%>" method="POST" enctype="multipart/form-data">
+    <form action="/editcomics/edit-chapters/<%=editComic["_id"]%>" method="POST" enctype="multipart/form-data">
       <label for="chapters">Choose a comic chapter:</label>
       <select name="chapters" id="chapters" required>
         <% if (editComic) for(let i=0; i< locals.editComic.chapters.length; i++){ %>
@@ -54,7 +54,7 @@
       <br>
       <br>
       <input type="submit" value="Upload chapter pages">
-      <p><%=locals.errorMsg% || "Please upload images for the comic chapter selected"></p>
+      <p><%=locals.errorMsg || "Please upload images for the comic chapter selected"%></p>
     </form>
     <br>
     <br>

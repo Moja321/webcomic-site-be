@@ -11,7 +11,7 @@
     <p>We should add a form here for that</p>
     <br/>
     <h2>Create comic</h2>
-    <form action="/comics" method="POST" enctype="multipart/form-data">
+    <form action="/editcomics" method="POST" enctype="multipart/form-data">
       <label for="title">Title:</label><br>
       <input type="text" id="title" name="title" value="One Piece" required><br>
 
@@ -25,16 +25,16 @@
     </form>
     <br/>
     <p>A list of created comics will be rendered here, click them to update</p>
-    <h1>Comics List</h1>
+    <h2>Comics List</h2>
     <ul>
         <% if (locals.userComics) for(let i=0; i< locals.userComics.length; i++){ %>
         <li>
           <a href="/"><%= locals.userComics[i]["title"] %></a>
           <img src="<%=locals.userComics[i]["mainImg"]%>" width="200px" height="120px" alt="comic main image">
-          <a href="/comics/<%=locals.userComics[i]["_id"] %>/edit"><button>EDIT</button></a>
+          <a href="/editcomics/<%=locals.userComics[i]["_id"] %>/edit"><button>EDIT</button></a>
           <form
             style="display: inline"
-            action="/comics/<%=locals.userComics[i]["_id"] %>?_method=DELETE"
+            action="/editcomics/<%=locals.userComics[i]["_id"] %>?_method=DELETE"
             method="POST"
           >
             <input type="submit" value="DELETE" />

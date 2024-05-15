@@ -65,15 +65,17 @@ app.set("view engine", "ejs");
 //define controllers/routers
 const signupController = require("./controllers/signup");
 const loginController = require("./controllers/login");
-const comicsController = require("./controllers/comics");
+const editcomicsController = require("./controllers/editcomics");
 //const chaptersController = require("./controllers/chapters");
 const usersController = require("./controllers/users");
+const comicsController = require("./controllers/comics");
 
 //use controllers/routers
 app.use("/signup", signupController);
 app.use("/login", loginController);
-app.use("/comics", comicsController);
+app.use("/editcomics", editcomicsController);
 app.use("/users", usersController);
+app.use("/comics", comicsController);
 
 
 app.get("/", isAuthenticated, (req,res) => {
@@ -97,9 +99,9 @@ app.get("/", isAuthenticated, (req,res) => {
 app.get("/userpage" , (req,res) => {
     console.log(req.session);
     if (req.session.user){ //check if req.session.user is not empty
-        res.render("userpage", {loggedInUser: req.session.user["username"], userComics: req.session.user["comics"]}); 
+        res.render("user_editpage", {loggedInUser: req.session.user["username"], userComics: req.session.user["comics"]}); 
     } else {
-        res.render("userpage"); 
+        res.render("user_editpage"); 
     }
     
 })

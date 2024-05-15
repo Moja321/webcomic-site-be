@@ -7,7 +7,20 @@
     <%-include("./partials/header.ejs")%>  
 </head>
 <body>
-    <p>User created: <%= locals.createdUser || "none"  %></p> 
+    <p>This page is for : <%= locals.text || "none"  %></p> 
     <p>List of all comics should be here</p>
+    <h3>All comics List</h3>
+    <ul>
+        <% if (locals.comicsarr) for(let i=0; i< locals.comicsarr.length; i++){ %>
+            <% if (locals.comicsarr[i]) for(let j=0; j< locals.comicsarr[i].comics.length; j++){ %>
+
+                <li>
+                    <p><%= locals.comicsarr[i].comics[j].title %></p>
+                    <a href="/"><button>Go to comic</button></a>
+                </li>
+
+            <%}%>
+        <%}%>
+    </ul>
 </body>
 </html>
