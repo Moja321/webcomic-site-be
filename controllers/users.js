@@ -23,7 +23,12 @@ router.get("/",(req,res)=>{
             }
         }
 
-        res.render("all_userspage", {text: "all users", users: result});
+        if(req.session.user){
+            res.render("all_userspage", {text: "all users", users: result, loggedInUser:req.session.user["username"] || "none"});
+        }else{
+            res.render("all_userspage", {text: "all users", users: result});
+        }
+        
 
     }).catch((error)=>{
         console.log(error);
@@ -56,7 +61,11 @@ router.get("/:id/usercomics",(req,res)=>{
         //     }
         // }
 
-        res.render("user_comicspage", {text: "all comics of user", username: result['username'], comics: result['comics']});
+        if(req.session.user){
+            res.render("user_comicspage", {text: "all comics of user", username: result['username'], comics: result['comics'],  loggedInUser:req.session.user["username"] || "none"});
+        }else{
+            res.render("user_comicspage", {text: "all comics of user", username: result['username'], comics: result['comics']});
+        }
 
     }).catch((error)=>{
         console.log(error);

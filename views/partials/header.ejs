@@ -1,12 +1,19 @@
 <title>Awesome Webcomics</title>
 <link rel="stylesheet" href="/css/main.css">
+<div class="navuser">
+    <p>Logged in user: <%= locals.loggedInUser || "none" %></p>
+</div>
 <div class="navcontainer">
     <div class="navtitle"><h1>AWESOME WEBCOMICS</h1></div>
+    
     <div class="navlinks">
-        <div><a href="/"><p>Home</p></a></div>
+        <div><a href="/"><p>Sign in</p></a></div>
         <div><a href="/comics"><p>Comics</p></a></div>
         <div><a href="/users"><p>Users</p></a></div>
+
+        <% if (locals.loggedInUser) { %>
         <div><a href="/userpage"><p>Upload/Edit</p></a></div>
+        <% } %>
 
     </div>
     

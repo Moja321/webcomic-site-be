@@ -14,7 +14,7 @@
         <% if (locals.comics) for(let i=0; i< locals.comics.length; i++){ %>
         <li>
           <p><%= locals.comics[i].title %></p>
-          <a href="/"><button>Go to comic</button></a>
+          <a href="/comics/<%= comics[i]._id %>/comic"><button>Go to comic</button></a>
         </li>
         <%}%>
     </ul>

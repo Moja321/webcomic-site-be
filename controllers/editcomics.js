@@ -324,7 +324,7 @@ router.post("/edit-chapters/:id", (req,res) => {
 
         var addressArr = [];
         for (i=0;i<dataarr.length;i++){
-            addressArr.push("/public/uploads/comics/" + comicId + "/chapters/" + req.body.chapters + "/" + dataarr[i].filename);
+            addressArr.push("/uploads/comics/" + comicId + "/chapters/" + req.body.chapters + "/" + dataarr[i].filename);
         }
 
         //"/uploads/comics/" + comicId.toString() + "/mainImg/" + req.file.filename
