@@ -19,6 +19,7 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true },
   password: { type: String, required: true },
   comics:[comicSchema],
+  liked: [{type:String}]
   //likedcomicsid: [{type: String}], //this will accept comics id, used to know which comics user has already liked (liked comics can not be liked twice)
 });
 

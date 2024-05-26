@@ -21,6 +21,104 @@ const findComic = (comicsarr,comicid) => {
     return comic;
 }
 
+router.post("/:userid/:comicid/like",(req,res)=>{
+
+    console.log("START OF /comics/:userid&:comicid/like ROUTE:");
+
+    console.log("req.params.userid : "+ req.params.userid);
+    console.log("req.params.comicid : "+ req.params.comicid);
+
+    //return;
+
+    //2 mongoDB queries:
+
+    //first we increment comics likes key by 1
+    user.findOneAndUpdate({"comics._id":req.params.comicid},
+    {
+        $inc : {
+            "comics.$.likes" : 1
+        }
+
+    }, {returnDocument: 'after'}).then((result)=>{
+
+        console.log(result);
+        //return;
+
+        return user.findByIdAndUpdate(req.params.userid,{
+            $push : {
+                "liked" : req.params.comicid
+            }
+        }, {returnDocument:'after'})
+    }).then((result)=>{
+
+        console.log("like route result : " + result);
+        if(req.session.user){
+            req.session.user = result;
+        }
+        res.redirect("/comics/" + req.params.comicid + "/comic");
+
+        //return;
+
+    }).catch((error)=>{
+
+    });
+        
+    
+
+    //then we update users liked arr by adding comics id to it
+
+
+});
+
+router.post("/:userid/:comicid/unlike",(req,res)=>{
+
+    console.log("START OF /comics/:userid&:comicid/unlike ROUTE:");
+
+    console.log("req.params.userid : "+ req.params.userid);
+    console.log("req.params.comicid : "+ req.params.comicid);
+
+    //return;
+
+    //2 mongoDB queries:
+
+    //first we increment comics likes key by 1
+    user.findOneAndUpdate({"comics._id":req.params.comicid},
+    {
+        $inc : {
+            "comics.$.likes" : -1
+        }
+
+    }, {returnDocument: 'after'}).then((result)=>{
+
+        console.log(result);
+        //return;
+
+        return user.findByIdAndUpdate(req.params.userid,{
+            $pull : {
+                "liked" : req.params.comicid
+            }
+        }, {returnDocument:'after'})
+    }).then((result)=>{
+
+        console.log("unlike route result : " + result);
+        //console.log(result);
+        if(req.session.user){
+            req.session.user = result;
+        }
+        res.redirect("/comics/" + req.params.comicid + "/comic");
+        //return;
+
+    }).catch((error)=>{
+
+    });
+        
+    
+
+    //then we update users liked arr by adding comics id to it
+
+
+});
+
 //get all users route ("/")
 router.get("/",(req,res)=>{
     // res.send("User list");
@@ -149,14 +247,31 @@ router.get("/:comicid/comic",(req,res)=>{
         console.log("comic : "+ comic);
 
         //res.render("all_comicspage", {text: "all users", users: result});
-        res.render("comicpage", {text: "for an individual comic", comic: comic});
+        //const userLikedArr = 
+        if (req.session.user){
+            console.log("userLiked : "+ req.session.user["liked"]);
+            console.log(typeof(req.session.user["liked"]));
+            console.log(typeof(req.session.user["liked"][0]));
+            console.log(typeof(comic["_id"]));
+        }
+        
+
+        if(req.session.user){
+            res.render("comicpage", {text: "for an individual comic", comic: comic , loggedInUser: (req.session.user["username"]) || "none" , userLiked:(req.session.user["liked"]), userId : (req.session.user["_id"])});
+        }else{
+            res.render("comicpage", {text: "for an individual comic", comic: comic});
+        }
 
     }).catch((error)=>{
         console.log(error);
     });
 
+
     //res.render("all_userspage", {text: "all users"});
 })
+
+
+
 
 
 
