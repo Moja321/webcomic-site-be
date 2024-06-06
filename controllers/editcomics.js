@@ -98,7 +98,13 @@ router.get("/:id/edit",(req,res)=>{
     //console.log("chapters is: " + comic["chapters"][0]["chapterTitle"]);
 
     //need to add another object to pass to comic_editpage.ejs, the comic chapters object
-    res.render("comic_editpage.ejs",{editComic: comic});
+    //res.render("comic_editpage.ejs",{editComic: comic});
+
+    if(req.session.user){
+        res.render("comic_editpage.ejs",{editComic: comic,  loggedInUser: (req.session.user["username"]) || "none" });
+    }else{
+        res.render("comic_editpage.ejs",{editComic: comic});
+    }
 })
 
 router.post("/",upload.single('comicImg'),(req,res)=>{
@@ -675,7 +681,13 @@ router.post("/chapters/:id", (req,res) => {
         console.log("comic for edit is = " + comic);
 
         //re-render and pass result to comic_editpage.ejs
-        res.render("comic_editpage.ejs",{editComic: comic});
+        //res.render("comic_editpage.ejs",{editComic: comic});
+
+        if(req.session.user){
+            res.render("comic_editpage", { editComic: comic , loggedInUser: (req.session.user["username"]) || "none" });
+        }else{
+            res.render("comic_editpage", { editComic: comic });
+        }
 
     }).catch((error)=>{
         console.log(error);

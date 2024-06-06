@@ -46,7 +46,7 @@
                 <% if (locals.comic.chapters[i]._id == locals.chapterid) for (let j=0; j< locals.comic.chapters[i].pageImg.length; j++){ %>
                     <li>
                       <!-- <p><%= locals.comic.chapters[i].pageImg[j] %></p> -->
-                      <img src="<%=locals.comic.chapters[i].pageImg[j]%>" width="200px" height="120px" alt="chapter page <%= j+1 %>"> 
+                      <img src="<%=locals.comic.chapters[i].pageImg[j]%>" class="comic-page" alt="chapter page <%= j+1 %>"> 
                     </li>
                 <% } 
     
