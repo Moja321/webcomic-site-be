@@ -190,7 +190,7 @@ router.post("/",upload.single('comicImg'),(req,res)=>{
         console.log(req.session.user);
         console.log("current session's id: " + req.session.id);
     
-        res.render("userpage", {loggedInUser: req.session.user["username"], userComics: req.session.user["comics"]});
+        res.render("user_editpage", {loggedInUser: req.session.user["username"], userComics: req.session.user["comics"]});
 
     }).catch((error)=>{
     console.log(error);
@@ -413,7 +413,7 @@ router.post("/edit-chapters/:id", (req,res) => {
         var success = "Pages uploaded/updated succesfully!";
 
         //re-render and pass result to comic_editpage.ejs
-        res.render("comic_editpage.ejs",{editComic: comic, errorMsg: success});
+        res.render("comic_editpage.ejs",{loggedInUser: req.session.user["username"],editComic: comic, errorMsg: success});
         
         // .then((results)=>{
 
@@ -802,7 +802,7 @@ router.post("/:id", upload.single('comicImg'),(req, res) => {
     
             console.log("result of put request is :" + comic);
     
-            res.render("comic_editpage.ejs",{editComic: comic});
+            res.render("comic_editpage.ejs",{loggedInUser: req.session.user["username"], editComic: comic});
     
     
         }).catch((error)=>{
@@ -876,7 +876,7 @@ router.delete("/:id", (req,res) => {
         // });
 
         fs.rmSync("./public/uploads/comics/"+req.params.id, {recursive:true}) }).then((result)=>{
-            res.render("userpage", {userComics: req.session.user["comics"]})
+            res.render("user_editpage", {loggedInUser: req.session.user["username"], userComics: req.session.user["comics"]})
         }).catch((error)=>{
             console.error('Error removing item:', error);
         });

@@ -7,25 +7,20 @@
     <%-include("./partials/header.ejs")%>  
 </head>
 <body>
-    <p>This page is for : <%= locals.text || "none"  %></p> 
-    <p>Comic : </p>
     <h2><%= locals.comic.title || "none" %></h2>
     <p>Likes: <%= locals.comic.likes %></p>
     <% if (locals.loggedInUser)  { 
         if (locals.userLiked.includes(locals.comic["_id"].toString())) { %>
-            <p>Dislike</p>
             <form action="/comics/<%= locals.userId %>/<%= locals.comic._id %>/unlike" method="post">
                 <input type="submit" value="Unlike comic" />
              </form>
         <% } else { %> 
-            <p>Like</p>
             <form action="/comics/<%= locals.userId %>/<%= locals.comic._id %>/like" method="post">
                 <input type="submit" value="Like comic" />
             </form>
         <% } %>
     <% } %>
-    <p>List this comics chapters should be here</p>
-    <h3>All chapters List</h3>
+    <h3>Chapters List:</h3>
     <form action="/comics/<%= locals.comic._id %>/chapter" method="GET">
         <label for="chapterid">Choose a comic chapter:</label>
         <select name="chapterid" id="chapterid" required>

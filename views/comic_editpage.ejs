@@ -9,18 +9,15 @@
 </head>
 <body>
 
-    <h2>Edit comic</h2>
+    <h2>Edit comic : <%= editComic["title"] %></h2>
     
-    <p>This is the page for individual comics</p>
-    <p>There should be a drop down list of comic chapters here</p>
-
     <form action="/editcomics/<%=editComic["_id"]%>" method="POST" enctype="multipart/form-data">
       <label for="title">Title:</label><br>
       <input type="text" id="title" name="title" value="<%=editComic["title"]%>" required><br>
 
       <p>Upload image for comic here</p>
       <input type="file" accept="image/*" id="comicImg" name="comicImg" required><br>
-      <img src="<%=editComic["mainImg"]%>" width="200px" height="120px" alt="comic main image"><br>
+      <img src="<%=editComic["mainImg"]%>" width="200px" alt="comic main image"><br>
       <label for="synopsis">Synopsis:</label><br>
       <textarea id="synopsis" name="synopsis" rows="4" cols="50" required><%=editComic["synopsis"]%></textarea><br>
       
@@ -31,13 +28,14 @@
 
     <h2>Add new chapter</h2>
     <form action="/editcomics/chapters/<%=editComic["_id"]%>" method="POST">
-      <label for="title">Chapter Title:</label><br>
-      <input type="text" id="chapterTitle" name="chapterTitle" value="Chapter 1" required><br>
-      
+      <label for="title">Chapter Title:</label><br/>
+      <br/>
+      <input type="text" id="chapterTitle" name="chapterTitle" value="Chapter 1" required><br/>
+      <br/>
       <input type="submit" value="Add new chapter">
     </form>
     <br>
-    <p>Chapters list:</p>
+    <h2>Upload images chapter</h2>
     <form action="/editcomics/edit-chapters/<%=editComic["_id"]%>" method="POST" enctype="multipart/form-data">
       <label for="chapters">Choose a comic chapter:</label>
       <select name="chapters" id="chapters" required>
@@ -47,12 +45,14 @@
         
         <%}%>
       </select>
-      <p>Upload image for comic chapter here</p>
+      <br/>
+      <br/>
       <label for="chapterImg">Upload pages :</label>
+      <br/>
+      <br/>
       <input type="file" accept="image/*" id="chapterImg" name="chapterImg" multiple><br>
       <output id="list"></output>
-      <br>
-      <br>
+      <br/>
       <input type="submit" value="Upload chapter pages">
       <p><%=locals.errorMsg || "Please upload images for the comic chapter selected"%></p>
     </form>

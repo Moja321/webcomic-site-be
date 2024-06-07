@@ -6,10 +6,10 @@
     <%-include("./partials/header.ejs")%>  
 </head>
 <body>
-    <p>User page of: <%= locals.loggedInUser || "none"  %></p> 
-    <p>This is where we can create or update comics/series</p>
-    <p>We should add a form here for that</p>
-    <br/>
+    <p>Logged in user page of: <%= locals.loggedInUser || "none"  %></p> 
+    <p>This is where users can create or update comics/series</p>
+    <% if (locals.loggedInUser) { %>
+    
     <h2>Create comic</h2>
     <form action="/editcomics" method="POST" enctype="multipart/form-data">
       <label for="title">Title:</label><br>
@@ -24,13 +24,15 @@
       <input type="submit" value="Submit">
     </form>
     <br/>
-    <p>A list of created comics will be rendered here, click them to update</p>
+    <p>Click on a comic to edit/update</p>
     <h2>Comics List</h2>
     <ul>
         <% if (locals.userComics) for(let i=0; i< locals.userComics.length; i++){ %>
         <li>
-          <a href="/"><%= locals.userComics[i]["title"] %></a>
-          <img src="<%=locals.userComics[i]["mainImg"]%>" width="200px" height="120px" alt="comic main image">
+          <p><%= locals.userComics[i]["title"] %></p>
+          <img src="<%=locals.userComics[i]["mainImg"]%>" width="200px" alt="comic main image">
+          <br/>
+          <br/>
           <a href="/editcomics/<%=locals.userComics[i]["_id"] %>/edit"><button>EDIT</button></a>
           <form
             style="display: inline"
@@ -43,5 +45,7 @@
         <br />
         <%}%>
     </ul>
+
+    <% } %>
 </body>
 </html>

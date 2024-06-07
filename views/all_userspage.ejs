@@ -7,9 +7,7 @@
     <%-include("./partials/header.ejs")%>  
 </head>
 <body>
-    <p>This page is for : <%= locals.text || "none"  %></p> 
-    <p>List of all users should be here</p>
-    <h3>Users List</h3>
+    <h3>All users list</h3>
     <ul>
         <% if (locals.users) for(let i=0; i< locals.users.length; i++){ %>
         <li>

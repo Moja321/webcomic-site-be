@@ -7,17 +7,14 @@
     <%-include("./partials/header.ejs")%>  
 </head>
 <body>
-    <p>This page is for : <%= locals.text || "none"  %></p> 
-    <p>List of all comics should be here</p>
-    <h3>All comics List</h3>
-    <p>TODO:Add comic thumbnail and synopsis! And likes!</p>
+    <h3>All comics list</h3>
     <ul>
         <% if (locals.comicsarr) for(let i=0; i< locals.comicsarr.length; i++){ %>
             <% if (locals.comicsarr[i]) for(let j=0; j< locals.comicsarr[i].comics.length; j++){ %>
 
                 <li>
                     <p><%= locals.comicsarr[i].comics[j].title %></p>
-                    <img src="<%= locals.comicsarr[i].comics[j].mainImg%>" width="200px" height="120px" alt="comic main image"><br>
+                    <img src="<%= locals.comicsarr[i].comics[j].mainImg%>" width="200px" alt="comic main image"><br>
                     <p>Synopsis : <%= locals.comicsarr[i].comics[j].synopsis %></p>
                     <p>Likes : <%= locals.comicsarr[i].comics[j].likes %></p>
                     <a href="/comics/<%= locals.comicsarr[i].comics[j]._id %>/comic"><button>Go to comic</button></a>
