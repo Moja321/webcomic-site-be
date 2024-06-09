@@ -58,7 +58,7 @@ router.post("/",(req,res)=>{
                         if (err) return next(err);
                         //For logins, its recommended that we redirect first to another url 
                         //which will request a GET method to render the page, see index.js
-                        res.redirect("/userpage");
+                        res.redirect("/");
                     })
 
                 })

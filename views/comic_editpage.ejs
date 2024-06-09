@@ -64,6 +64,18 @@
     <br>
     <br>
     <br>
+
+    <% if (locals.info) { %>
+      <script>
+        var msg = '<%= locals.info %>';
+        window.onload = () =>{
+          setTimeout(function() {
+              alert(msg);
+          }, 100);
+        }
+      </script>
+    <% } %>
+
     <script>
 
       function handleFileSelect (evt) {

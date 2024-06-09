@@ -190,7 +190,8 @@ router.post("/",upload.single('comicImg'),(req,res)=>{
         console.log(req.session.user);
         console.log("current session's id: " + req.session.id);
     
-        res.render("user_editpage", {loggedInUser: req.session.user["username"], userComics: req.session.user["comics"]});
+        res.render("user_editpage", {info: "Comic created succesfully!", loggedInUser: req.session.user["username"], userComics: req.session.user["comics"]});
+        
 
     }).catch((error)=>{
     console.log(error);
@@ -269,7 +270,7 @@ router.post("/edit-chapters/:id", (req,res) => {
         //     console.log(dataarr[i].path);
         // }
 
-        const errMsg = "No images were uploaded, please provide at least 1 page to upload";
+        const errMsg = "No images were uploaded, please provide at least 1 comic page to upload";
 
         if (dataarr.length === 0) {
             console.log(errMsg);
@@ -283,7 +284,7 @@ router.post("/edit-chapters/:id", (req,res) => {
             console.log("comic for edit is = " + comic);
 
             //re-render and pass result to comic_editpage.ejs
-            res.render("comic_editpage.ejs",{editComic: comic, errorMsg: errMsg});
+            res.render("comic_editpage.ejs",{info: "No images were uploaded, please provide at least 1 comic page to upload", editComic: comic, errorMsg: errMsg});
 
             return;
 
@@ -413,7 +414,12 @@ router.post("/edit-chapters/:id", (req,res) => {
         var success = "Pages uploaded/updated succesfully!";
 
         //re-render and pass result to comic_editpage.ejs
-        res.render("comic_editpage.ejs",{loggedInUser: req.session.user["username"],editComic: comic, errorMsg: success});
+        if (req.session.user){
+            res.render("comic_editpage.ejs",{info : "Uploaded comic pages succesfully!", loggedInUser: req.session.user["username"],editComic: comic, errorMsg: success});
+        } else {
+            res.render("comic_editpage.ejs",{info : "No user logged in"});
+        }
+        
         
         // .then((results)=>{
 
@@ -626,7 +632,7 @@ router.post("/edit-chapters/:id", (req,res) => {
 
 router.post("/chapters/:id", (req,res) => {
     
-    console.log("START OF comics/chapters/:id POST ROUTE:");
+    console.log("START OF editcomics/chapters/:id POST ROUTE:");
 
     //TODO:comicId is not defined
     user.findOneAndUpdate({ "_id": req.session.user["_id"], "comics._id": req.params.id },
@@ -684,7 +690,7 @@ router.post("/chapters/:id", (req,res) => {
         //res.render("comic_editpage.ejs",{editComic: comic});
 
         if(req.session.user){
-            res.render("comic_editpage", { editComic: comic , loggedInUser: (req.session.user["username"]) || "none" });
+            res.render("comic_editpage", { info: "Chapter created succesfully!", editComic: comic , loggedInUser: (req.session.user["username"]) || "none" });
         }else{
             res.render("comic_editpage", { editComic: comic });
         }
@@ -802,7 +808,12 @@ router.post("/:id", upload.single('comicImg'),(req, res) => {
     
             console.log("result of put request is :" + comic);
     
-            res.render("comic_editpage.ejs",{loggedInUser: req.session.user["username"], editComic: comic});
+            if (req.session.user) {
+                res.render("comic_editpage.ejs",{info : "Updated comic details succesfully!", loggedInUser: req.session.user["username"], editComic: comic});
+            } else {
+                res.render("comic_editpage.ejs",{info: "No user logged in"});
+            }
+            
     
     
         }).catch((error)=>{
@@ -876,7 +887,7 @@ router.delete("/:id", (req,res) => {
         // });
 
         fs.rmSync("./public/uploads/comics/"+req.params.id, {recursive:true}) }).then((result)=>{
-            res.render("user_editpage", {loggedInUser: req.session.user["username"], userComics: req.session.user["comics"]})
+            res.render("user_editpage", {info: "Comic deleted succesfully!", loggedInUser: req.session.user["username"], userComics: req.session.user["comics"]})
         }).catch((error)=>{
             console.error('Error removing item:', error);
         });
