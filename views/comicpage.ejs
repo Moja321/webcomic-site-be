@@ -24,10 +24,14 @@
     <form action="/comics/<%= locals.comic._id %>/chapter" method="GET">
         <label for="chapterid">Choose a comic chapter:</label>
         <select name="chapterid" id="chapterid" required>
-          <% if (locals.comic) for(let i=0; i< locals.comic.chapters.length; i++){ %>
+          <% if (locals.comic) for(let i=0; i< locals.comic.chapters.length; i++){ 
   
-          <option value="<%= locals.comic["chapters"][i]["_id"] %>"><%= locals.comic["chapters"][i]["chapterTitle"] %></option>
-          
+             if (locals.comic["chapters"][i]["_id"] == locals.chapterId){ %>
+                
+                <option value="<%= locals.comic["chapters"][i]["_id"] %>" selected><%= locals.comic["chapters"][i]["chapterTitle"] %></option>
+            <% } else { %>
+                <option value="<%= locals.comic["chapters"][i]["_id"] %>"><%= locals.comic["chapters"][i]["chapterTitle"] %></option>
+            <% } %>
           <%}%>
         </select>
         <input type="submit" value="Read chapter">

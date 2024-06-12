@@ -15,9 +15,13 @@
       <label for="title">Title:</label><br>
       <input type="text" id="title" name="title" value="<%=editComic["title"]%>" required><br>
 
-      <p>Upload image for comic here</p>
+      <p>Upload thumbnail image for comic here:</p>
       <input type="file" accept="image/*" id="comicImg" name="comicImg" required><br>
+      <output id="preview"></output>
+      <br/>
+      <p>Current comic thumbnail image:</p>
       <img src="<%=editComic["mainImg"]%>" width="200px" alt="comic main image"><br>
+      <br/>
       <label for="synopsis">Synopsis:</label><br>
       <textarea id="synopsis" name="synopsis" rows="4" cols="50" required><%=editComic["synopsis"]%></textarea><br>
       
@@ -98,6 +102,27 @@
       }
 
       document.getElementById('chapterImg').addEventListener('change', handleFileSelect, false);
+
+      function handleFileSelect2 (evt) {
+
+      //Empty the list element first
+      document.getElementById('preview').innerHTML = "";
+
+      // Loop through the FileList and render image files as thumbnails.
+      for (const file of evt.target.files) {
+
+        // Render thumbnail.
+        const span = document.createElement('span')
+        const src = URL.createObjectURL(file)
+        span.innerHTML = 
+          `<img style="width: 200px; border: 1px solid #000; margin: 5px"` + 
+          `src="${src}" title="${escape(file.name)}">`
+
+        document.getElementById('preview').insertBefore(span, null)
+      }
+      }
+
+      document.getElementById('comicImg').addEventListener('change', handleFileSelect2, false);
 
     </script>
 </body>

@@ -180,9 +180,9 @@ router.get("/:comicid/chapter",(req,res)=>{
         //res.render("all_comicspage", {text: "all users", users: result});
 
         if(req.session.user){
-            res.render("comicpage", {text: "for an individual comic", comic: comic , chapterid : req.query.chapterid , loggedInUser: (req.session.user["username"]) || "none" , userLiked:(req.session.user["liked"]), userId : (req.session.user["_id"])});
+            res.render("comicpage", {chapterId: req.query.chapterid, text: "for an individual comic", comic: comic , chapterid : req.query.chapterid , loggedInUser: (req.session.user["username"]) || "none" , userLiked:(req.session.user["liked"]), userId : (req.session.user["_id"])});
         }else{
-            res.render("comicpage", {text: "for an individual comic", comic: comic , chapterid : req.query.chapterid });
+            res.render("comicpage", {chapterId: req.query.chapterid, text: "for an individual comic", comic: comic , chapterid : req.query.chapterid });
         }
         
 

@@ -1,3 +1,11 @@
+/* :root {
+  background-color:aquamarine;
+} */
+
+body {
+  background-color: lightblue;
+}
+
 .navcontainer{
     display:flex;
     flex-direction: column;
@@ -46,7 +54,7 @@ ul.no-bullets {
 
   @media only screen and (max-width: 600px) {
     body {
-      background-color: lightblue;
+      background-color: aquamarine;
     }
     .comic-page{
         height:600px;
