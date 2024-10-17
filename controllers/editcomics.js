@@ -340,6 +340,7 @@ router.post("/edit-chapters/:id", (req,res) => {
 
             "$set": {
 
+                //below we are emptying the pageImg array with = []
                 "comics.$[i].chapters.$[j].pageImg":[]
 
                 //"comics.$[i].chapters.$[j].pageImg":{$each: addressArr}
